@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Level;
 import TripleXGaming.ForgeTools.ForgeTools;
 import cpw.mods.fml.common.FMLLog;
 
-public class SpaceCraftConfigurationMain{
+public class ForgeToolsConfigurationMain{
 	public static Configuration config;
 
 	public static boolean debugMode;

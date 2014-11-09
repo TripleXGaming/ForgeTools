@@ -6,6 +6,7 @@ import TripleXGaming.ForgeTools.Commands.CommandInfo;
 import TripleXGaming.ForgeTools.Commands.CommandSetHome;
 import TripleXGaming.ForgeTools.Commands.CommandSetSpawn;
 import TripleXGaming.ForgeTools.Commands.CommandSpawn;
+import TripleXGaming.ForgeTools.Config.ForgeToolsConfiguration;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 
@@ -22,7 +23,8 @@ public class ForgeTools
 {
     public static final String MODID = "Forge Tools";
     public static final String VERSION = "0.1";
-
+	public static  String configPath;
+	
     //this better be here
     //test
 
@@ -30,6 +32,10 @@ public class ForgeTools
     public void preinit(FMLPreInitializationEvent event)
     {
         System.out.println(ChatFormatting.RED + MODID + " Version " + VERSION + " is Initializing.");
+        
+        configPath = event.getModConfigurationDirectory() + "/ForgeTools/";
+        ForgeToolsConfiguration.init(configPath);
+        
     }
     
     @EventHandler

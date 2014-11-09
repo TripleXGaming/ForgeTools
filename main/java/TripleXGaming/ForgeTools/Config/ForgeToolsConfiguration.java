@@ -2,13 +2,13 @@ package TripleXGaming.ForgeTools.Config;
 
 import java.io.File;
 
-public class SpaceCraftConfiguration{
+public class ForgeToolsConfiguration{
 	public static File mainConfigFile;
 	public static File MachineConfigFile;
 
 	public static void init(String configpath){
-		mainConfigFile = new File(configpath + "main.cfg");
+		mainConfigFile = new File(configpath + "ForgeTools.cfg");
 
-		SpaceCraftConfigurationMain.init(mainConfigFile);
+		ForgeToolsConfigurationMain.init(mainConfigFile);
 	}
 }
