@@ -59,6 +59,8 @@ public class CommandHeal implements ICommand {
 		    	
 		    	EntityPlayerMP thePlayer = (EntityPlayerMP) player;    	
 		    	player.setHealth(20f);
+		    	player.setAbsorptionAmount(20f);
+		    	player.getFoodStats().setFoodLevel(20);
 		    	//List<EntityPlayerMP> thePlayer = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
 		    }
 	    }
