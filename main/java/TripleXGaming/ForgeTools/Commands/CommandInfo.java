@@ -58,12 +58,11 @@ public class CommandInfo implements ICommand {
 
                     //create array with all online player names
                     String[] onlinePlayers = new String[PlayerList.size()];
-                    int i =0;
+                    int i = 0;
                     for(EntityPlayer p : PlayerList){
                         onlinePlayers[i] = p.getDisplayName();
                         i++;
                     }
-
 
 			    	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + " Players Online: " + PlayerList.size() + "/" + MinecraftServer.getServer().getMaxPlayers()));
                     player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + " " + Arrays.toString(onlinePlayers)));
