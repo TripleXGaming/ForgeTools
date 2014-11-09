@@ -20,7 +20,6 @@ public class ForgeTools
     public void preinit(FMLPreInitializationEvent event)
     {
         System.out.println(ChatFormatting.RED + MODID + " Version " + VERSION + " is Initializing.");
-        System.out.println(ChatFormatting.RED + MODID + " Version " + VERSION + " is Initializing.");
     }
     
     @EventHandler
