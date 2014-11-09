@@ -64,7 +64,6 @@ public class CommandInfo implements ICommand {
                         i++;
                     }
 
-
 			    	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + " Players Online: " + PlayerList.size() + "/" + MinecraftServer.getServer().getMaxPlayers()));
                     player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + " " + Arrays.toString(onlinePlayers)));
                     //player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + " " + TPS));
