@@ -1,4 +1,4 @@
-package TripleXGaming.ForgeTools.Commands;
+package triplexgaming.forgetools.commands;
 
 import java.util.ArrayList;
 import java.util.List;

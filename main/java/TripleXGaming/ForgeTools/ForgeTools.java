@@ -1,16 +1,17 @@
-package TripleXGaming.ForgeTools;
+package triplexgaming.forgetools;
 //coded by TripleXGaming and Spying247
-import TripleXGaming.ForgeTools.Commands.CommandHeal;
-import TripleXGaming.ForgeTools.Commands.CommandHome;
-import TripleXGaming.ForgeTools.Commands.CommandInfo;
-import TripleXGaming.ForgeTools.Commands.CommandSetHome;
-import TripleXGaming.ForgeTools.Commands.CommandSetSpawn;
-import TripleXGaming.ForgeTools.Commands.CommandSpawn;
-import TripleXGaming.ForgeTools.Config.ForgeToolsConfiguration;
+
+
+import triplexgaming.forgetools.commands.CommandHeal;
+import triplexgaming.forgetools.commands.CommandHome;
+import triplexgaming.forgetools.commands.CommandInfo;
+import triplexgaming.forgetools.commands.CommandSetHome;
+import triplexgaming.forgetools.commands.CommandSetSpawn;
+import triplexgaming.forgetools.commands.CommandSpawn;
+import triplexgaming.forgetools.config.ForgeToolsConfiguration;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 
-import net.minecraft.init.Blocks;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;

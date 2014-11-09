@@ -1,4 +1,4 @@
-package TripleXGaming.ForgeTools.Config;
+package triplexgaming.forgetools.config;
 
 import java.io.File;
 
@@ -7,7 +7,6 @@ import net.minecraftforge.common.config.Property;
 
 import org.apache.logging.log4j.Level;
 
-import TripleXGaming.ForgeTools.ForgeTools;
 import cpw.mods.fml.common.FMLLog;
 
 public class ForgeToolsConfigurationMain{

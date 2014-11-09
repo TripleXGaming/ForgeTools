@@ -1,4 +1,4 @@
-package TripleXGaming.ForgeTools;
+package triplexgaming.forgetools;
 
 import net.minecraft.world.World;
 

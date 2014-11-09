@@ -1,4 +1,4 @@
-package TripleXGaming.ForgeTools.Config;
+package triplexgaming.forgetools.config;
 
 import java.io.File;
 

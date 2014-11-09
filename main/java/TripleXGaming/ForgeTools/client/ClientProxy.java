@@ -1,6 +1,6 @@
-package TripleXGaming.ForgeTools.client;
+package triplexgaming.forgetools.client;
 
-import TripleXGaming.ForgeTools.CommonProxy;
+import triplexgaming.forgetools.CommonProxy;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;

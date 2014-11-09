@@ -1,4 +1,4 @@
-package TripleXGaming.ForgeTools;
+package triplexgaming.forgetools;
 
 import java.util.Random;
 
