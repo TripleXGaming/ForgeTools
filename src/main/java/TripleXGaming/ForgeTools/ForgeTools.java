@@ -1,5 +1,5 @@
 package TripleXGaming.ForgeTools;
-//testing commit
+//testing commit it works
 //spying247 was here again
 import TripleXGaming.ForgeTools.Commands.CommandHome;
 import com.mojang.realmsclient.gui.ChatFormatting;
