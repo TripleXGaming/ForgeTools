@@ -1,13 +1,7 @@
 package TripleXGaming.ForgeTools;
 //coded by TripleXGaming
-import TripleXGaming.ForgeTools.Commands.CommandHeal;
 import TripleXGaming.ForgeTools.Commands.CommandHome;
-import TripleXGaming.ForgeTools.Commands.CommandSetHome;
-import TripleXGaming.ForgeTools.Commands.CommandSetSpawn;
-import TripleXGaming.ForgeTools.Commands.CommandSpawn;
-
 import com.mojang.realmsclient.gui.ChatFormatting;
-
 import net.minecraft.init.Blocks;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -46,11 +40,6 @@ public class ForgeTools
 	@EventHandler
 	public void serverLoad(FMLServerStartingEvent event){
 		event.registerServerCommand(new CommandHome());
-		event.registerServerCommand(new CommandSetHome());
-		event.registerServerCommand(new CommandSpawn());
-		event.registerServerCommand(new CommandSetSpawn());
-		event.registerServerCommand(new CommandHeal());
-		
 		
 	}
 }
