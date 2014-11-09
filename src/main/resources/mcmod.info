@@ -1,6 +1,6 @@
 [
 {
-  "modid": "forgetools",
+  "modid": "Forge Tools",
   "name": "Forge Tools",
   "description": "Extra utility and fun commands",
   "version": "${version}",
