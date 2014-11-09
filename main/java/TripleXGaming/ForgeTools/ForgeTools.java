@@ -16,6 +16,7 @@ public class ForgeTools
     public static final String MODID = "Forge Tools";
     public static final String VERSION = "0.1";
     //this better be here
+    //test
     @EventHandler
     public void preinit(FMLPreInitializationEvent event)
     {
