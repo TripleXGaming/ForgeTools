@@ -1,16 +1,20 @@
 package TripleXGaming.ForgeTools.Commands;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentTranslation;
+import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.MinecraftForge;
 
 public class CommandInfo implements ICommand {
 
@@ -51,8 +55,18 @@ public class CommandInfo implements ICommand {
 		 if(icommandsender instanceof EntityPlayer){
 		    	EntityPlayer player = (EntityPlayer) icommandsender;
 		    	if(player.worldObj.isRemote == false){
-		    		
-			    	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + " Players Online: " + PlayerList.size()));
+
+                    String[] onlinePlayers = new String[PlayerList.size()];
+                    int i =0;
+                    for(EntityPlayer p : PlayerList){
+                        onlinePlayers[i] = p.getDisplayName();
+                        i++;
+                    }
+
+
+			    	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + " Players Online: " + PlayerList.size() + "/" + MinecraftServer.getServer().getMaxPlayers()));
+                    player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + " " + Arrays.toString(onlinePlayers)));
+                    //player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + " " + TPS));
 			    	//player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + " " + PlayerList.));
 
 			    }

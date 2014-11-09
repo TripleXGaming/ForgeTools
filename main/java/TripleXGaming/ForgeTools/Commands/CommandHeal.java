@@ -85,7 +85,6 @@ public class CommandHeal implements ICommand {
                 	if(icommandsender instanceof EntityPlayer){
             	    	EntityPlayer player = (EntityPlayer) icommandsender;
             	    	if(player.worldObj.isRemote == false){
-            	    		
             	    		player.addChatMessage(new ChatComponentTranslation(ChatFormatting.RED + "/heal <Player Name>"));
             		    }
             	    }
