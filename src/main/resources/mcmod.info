@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "forgetools",
+  "name": "Forge Tools",
+  "description": "Extra utility and fun commands",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["TripleXGaming", "spying247"],
+  "credits": "TripleXGaming and spying247",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
