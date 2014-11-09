@@ -56,6 +56,7 @@ public class CommandInfo implements ICommand {
 		    	EntityPlayer player = (EntityPlayer) icommandsender;
 		    	if(player.worldObj.isRemote == false){
 
+                    //create array with all online player names
                     String[] onlinePlayers = new String[PlayerList.size()];
                     int i =0;
                     for(EntityPlayer p : PlayerList){
