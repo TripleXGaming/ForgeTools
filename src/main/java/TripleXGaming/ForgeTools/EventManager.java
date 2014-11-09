@@ -1,8 +1,4 @@
 package TripleXGaming.ForgeTools;
-/*
-you are full retard!
-thats a lie
-*/
 
 import java.util.Random;
 
