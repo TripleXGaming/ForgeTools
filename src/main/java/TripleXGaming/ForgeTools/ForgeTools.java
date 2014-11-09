@@ -1,6 +1,9 @@
 package TripleXGaming.ForgeTools;
-//testing commit it works
-//spying247 was here again
+/*
+testing commit it works
+spying247 was here again
+*/
+
 import TripleXGaming.ForgeTools.Commands.CommandHome;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.init.Blocks;

@@ -18,6 +18,7 @@ public class CommandHome implements ICommand
   {
     this.aliases = new ArrayList();
     this.aliases.add("home");
+    this.aliases.add("house");
   }
 
   @Override
