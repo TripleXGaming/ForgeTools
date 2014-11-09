@@ -5,10 +5,12 @@ import java.util.List;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentTranslation;
 
 public class CommandHeal implements ICommand {
@@ -45,25 +47,53 @@ public class CommandHeal implements ICommand {
 
 	  @Override
 	  public void processCommand(ICommandSender icommandsender, String[] astring){
-	    if(astring.length == 0){
-	      icommandsender.addChatMessage(new ChatComponentTranslation(ChatFormatting.RED + "/heal <Player Name>"));
-	      return;
-	    }
-	    
-	    if(icommandsender instanceof EntityPlayer){
+		    List<EntityPlayerMP> PlayerList = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
 
+		  
+	    if(astring.length == 0){
+	    //  icommandsender.addChatMessage(new ChatComponentTranslation(ChatFormatting.RED + "/heal <Player Name>"));
+	    if(icommandsender instanceof EntityPlayer){
 	    	EntityPlayer player = (EntityPlayer) icommandsender;
 	    	if(player.worldObj.isRemote == false){
 	    		
 		    	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + "You suddenly Feel a rush of life"));
-		    	
-		    	EntityPlayerMP thePlayer = (EntityPlayerMP) player;    	
 		    	player.setHealth(20f);
 		    	player.setAbsorptionAmount(20f);
 		    	player.getFoodStats().setFoodLevel(20);
-		    	//List<EntityPlayerMP> thePlayer = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
 		    }
 	    }
+	    	return;
+	    }
+	    if (astring.length != 0)
+	    {
+	    	
+            for(int i = 0; i < PlayerList.size(); i++) {
+                if(PlayerList.get(i).getDisplayName().equals(astring[0])){
+                    EntityPlayer player = PlayerList.get(i);
+        	    	System.out.println(player);
+        	    	if(player.worldObj.isRemote == false){
+        	    		
+        		    	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + "You suddenly Feel a rush of life"));
+        		    	player.setHealth(20f);
+        		    	player.setAbsorptionAmount(20f);
+        		    	player.getFoodStats().setFoodLevel(20);
+        		    }
+                }
+                else
+                {
+                	if(icommandsender instanceof EntityPlayer){
+            	    	EntityPlayer player = (EntityPlayer) icommandsender;
+            	    	if(player.worldObj.isRemote == false){
+            	    		
+            	    		player.addChatMessage(new ChatComponentTranslation(ChatFormatting.RED + "/heal <Player Name>"));
+            		    }
+            	    }
+            	    	return;
+            	   }
+                }
+	    	
+            }
+	  
 	  }
 
 	  @Override
