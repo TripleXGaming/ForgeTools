@@ -1,5 +1,5 @@
 package TripleXGaming.ForgeTools;
-
+//you are full retard!
 import java.util.Random;
 
 import net.minecraft.block.Block;
