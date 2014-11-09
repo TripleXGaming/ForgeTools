@@ -76,7 +76,8 @@ public class CommandHeal implements ICommand {
         		    	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + "You suddenly Feel a rush of life"));
         		    	player.setHealth(20f);
         		    	player.setAbsorptionAmount(20f);
-        		    	player.getFoodStats().setFoodLevel(20);
+        		    	
+        		    	player.getFoodStats().setFoodLevel(50);
         		    }
                 }
                 else

@@ -2,6 +2,7 @@ package TripleXGaming.ForgeTools;
 //coded by TripleXGaming and Spying247
 import TripleXGaming.ForgeTools.Commands.CommandHeal;
 import TripleXGaming.ForgeTools.Commands.CommandHome;
+import TripleXGaming.ForgeTools.Commands.CommandInfo;
 import TripleXGaming.ForgeTools.Commands.CommandSetHome;
 import TripleXGaming.ForgeTools.Commands.CommandSetSpawn;
 import TripleXGaming.ForgeTools.Commands.CommandSpawn;
@@ -50,6 +51,7 @@ public class ForgeTools
 		event.registerServerCommand(new CommandSpawn());
 		event.registerServerCommand(new CommandSetSpawn());
 		event.registerServerCommand(new CommandHeal());
+		event.registerServerCommand(new CommandInfo());
 		
 		
 	}
