@@ -1,5 +1,5 @@
 package TripleXGaming.ForgeTools;
-//coded by TripleXGaming
+//coded by TripleXGaming and Spying247
 import TripleXGaming.ForgeTools.Commands.CommandHeal;
 import TripleXGaming.ForgeTools.Commands.CommandHome;
 import TripleXGaming.ForgeTools.Commands.CommandSetHome;
