@@ -1,0 +1,39 @@
+****************************
+ Powered By MCP:             
+ http://mcp.ocean-labs.de/   
+ Searge, ProfMobius, Fesh0r, 
+ R4wk, ZeuX, IngisKahn, bspkrs
+ MCP Data version : unknown
+****************************
+:extractMcpData
+:getVersionJson
+:extractUserDev
+:genSrgs SKIPPED
+:extractNatives
+:copyNativesLegacy
+:getAssetsIndex
+:getAssets
+:makeStart SKIPPED
+:downloadMcpTools SKIPPED
+:downloadClient SKIPPED
+:downloadServer SKIPPED
+:mergeJars SKIPPED
+:deobfuscateJar SKIPPED
+:decompile SKIPPED
+:processSources
+Injecting fml files
+Applying fml patches
+Applying forge patches
+:remapJar SKIPPED
+:extractMinecraftSrc SKIPPED
+:recompMinecraft SKIPPED
+:repackMinecraft SKIPPED
+:setupDecompWorkspace UP-TO-DATE
+:ideaModule
+:ideaProject
+:ideaWorkspace
+:idea
+
+BUILD SUCCESSFUL
+
+Total time: 3 mins 50.519 secs
