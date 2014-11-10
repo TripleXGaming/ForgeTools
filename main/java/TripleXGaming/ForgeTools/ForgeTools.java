@@ -8,6 +8,8 @@ import triplexgaming.forgetools.commands.CommandInfo;
 import triplexgaming.forgetools.commands.CommandSetHome;
 import triplexgaming.forgetools.commands.CommandSetSpawn;
 import triplexgaming.forgetools.commands.CommandSpawn;
+import triplexgaming.forgetools.commands.CommandTpa;
+import triplexgaming.forgetools.commands.CommandTpaHere;
 import triplexgaming.forgetools.config.ForgeToolsConfiguration;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
@@ -25,9 +27,7 @@ public class ForgeTools
     public static final String MODID = "Forge Tools";
     public static final String VERSION = "0.1";
 	public static  String configPath;
-	
-    //this better be here
-    //test
+
 
     @EventHandler
     public void preinit(FMLPreInitializationEvent event)
@@ -59,6 +59,8 @@ public class ForgeTools
 		event.registerServerCommand(new CommandSetSpawn());
 		event.registerServerCommand(new CommandHeal());
 		event.registerServerCommand(new CommandInfo());
+		event.registerServerCommand(new CommandTpa());
+		event.registerServerCommand(new CommandTpaHere());
 		
 		
 	}

@@ -1,5 +1,7 @@
 package triplexgaming.forgetools.commands;
 
+import java.lang.ref.WeakReference;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,23 +9,30 @@ import java.util.List;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentTranslation;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.server.command.ForgeCommand;
 
 public class CommandInfo implements ICommand {
-
-	  private List aliases;
+	private static final DecimalFormat timeFormatter = new DecimalFormat("########0.000");
+	private WeakReference<MinecraftServer> server;
+	private List aliases;
 	  public CommandInfo()
 	  {
+		this.server = new WeakReference(server);
 	    this.aliases = new ArrayList();
 	    this.aliases.add("info");
 	  }
+	  
+	  
 	  
 	@Override
 	public int compareTo(Object arg0) {
@@ -63,17 +72,28 @@ public class CommandInfo implements ICommand {
                         onlinePlayers[i] = p.getDisplayName();
                         i++;
                     }
+                    double worldTickTime = mean(MinecraftServer.getServer().worldTickTimes.get(0)) * 1.0E-6D;
+                    double worldTPS = Math.min(1000.0 / worldTickTime, 20);
+                    player.addChatMessage(new ChatComponentTranslation("TPS: " + worldTPS));
+			    	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + "Players Online: " + PlayerList.size() + "/" + MinecraftServer.getServer().getMaxPlayers()));
+              
+			    	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + "Online Players:  " + ChatFormatting.WHITE + Arrays.toString(onlinePlayers)));
+                    
 
-			    	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + " Players Online: " + PlayerList.size() + "/" + MinecraftServer.getServer().getMaxPlayers()));
-                    player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + " " + Arrays.toString(onlinePlayers)));
-                    //player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + " " + TPS));
-			    	//player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + " " + PlayerList.));
+
 
 			    }
 		    }
 		return;
 	}
 
+
+	
+    private MinecraftServer getServer()
+    {
+        return this.server.get();
+    }
+    
 	@Override
 	public boolean canCommandSenderUseCommand(ICommandSender p_71519_1_) {
 		// TODO Auto-generated method stub
@@ -93,4 +113,14 @@ public class CommandInfo implements ICommand {
 		return false;
 	}
 
+    private static long mean(long[] values) {
+
+        long sum = 0l;
+        for (long v : values) {
+            sum += v;
+        }
+
+        return sum / values.length;
+    }
+	
 }
