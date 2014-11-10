@@ -14,7 +14,7 @@ import net.minecraft.util.Vec3;
 
 public class Teleport {
 
-	public static ArrayList<ArrayList<EntityPlayer>> AllTPList = new ArrayList<ArrayList<EntityPlayer>>();
+	public ArrayList<ArrayList<EntityPlayer>> AllTPList = new ArrayList<ArrayList<EntityPlayer>>();
 	public ArrayList<EntityPlayer> PlayerTPList = new ArrayList<EntityPlayer>();
 	
 	
@@ -30,63 +30,57 @@ public class Teleport {
 	                if(PlayerList.get(i).getDisplayName().equals(PlayerReceiver[0])){
 	                    EntityPlayer ReceivingPlayer = PlayerList.get(i);
 	                    
-	            		if(TpaType)
-	            		{
 	            			//TPA
 	            			PlayerTPList.add(playerSender);
 	            			PlayerTPList.add(ReceivingPlayer);
 	            			AllTPList.add(PlayerTPList);
-	            		}
-	            		else
-	            		{
-	            			//TPAHERE
-	            			PlayerTPList.add(ReceivingPlayer);            			
-	            			PlayerTPList.add(playerSender);
-	            			AllTPList.add(PlayerTPList);
-	            		}
 	            		
 	        	    	MsgReceivingPlayer(ReceivingPlayer);
-	        	    	System.out.println(AllTPList);
 	                }
 	            }
 		    }
 	}
-	public void TeleportAcceptSession(EntityPlayer Player)
-	{
-		System.out.println(Player);
-		System.out.println(AllTPList);
-		EntityPlayer PlayerToTeleportTo = scanArray(AllTPList, Player);
-		System.out.println(PlayerToTeleportTo);
-		int CoordX = PlayerToTeleportTo.serverPosX;
-		int CoordY = PlayerToTeleportTo.serverPosY;
-		int CoordZ = PlayerToTeleportTo.serverPosZ;
-		ChunkCoordinates vec = PlayerToTeleportTo.getPlayerCoordinates();
-		Player.setPositionAndUpdate(vec.posX, vec.posY, vec.posZ);
-		DeleteArray(AllTPList, Player);
-	}
 	
-	public EntityPlayer scanArray(ArrayList allTPList, EntityPlayer recieving){
-        for(int r = 0; r <= allTPList.size(); r++){
+
+	
+	public void TeleportAcceptSession(EntityPlayer recieving){
+        for(int r = 0; r <= AllTPList.size(); r++){
             for(int c = 0; c <= PlayerTPList.size(); c++){
-            	System.out.println(PlayerTPList.indexOf(recieving));
-                if(PlayerTPList.indexOf(recieving) == 1) {
-                    return PlayerTPList.get(0);
-                    
-                }else if(PlayerTPList.indexOf(recieving) == 0){
-                    return PlayerTPList.get(1);
+                if(AllTPList.get(r).get(c).equals(recieving)) {
+                	EntityPlayer PlayerToTeleportTo = AllTPList.get(r).get(0);
+                	
+                	if(AllTPList.get(r).get(c) != PlayerToTeleportTo)
+                	{
+            			System.out.println(AllTPList);            	
+            			System.out.println(AllTPList.get(r).get(0));
+            			System.out.println(AllTPList.get(r).get(1));
+            			System.out.println(PlayerToTeleportTo);
+                    	TeleportPlayer(PlayerToTeleportTo, recieving);
+                		AllTPList.remove(r);
+                		PlayerTPList.clear();
+                		//DeleteArray(AllTPList, recieving);
+                		
+                	}
                 }
             }
         }
-        return null;
     }
+	
+	//Player that is being Teleported ---> Player to be teleported To!
+	public void TeleportPlayer(EntityPlayer Player1, EntityPlayer Player2)
+	{
+		
+		ChunkCoordinates vec = Player2.getPlayerCoordinates();
+		Player1.setPositionAndUpdate(vec.posX, vec.posY, vec.posZ);
+		
+	}
+	
 	
 	public void DeleteArray(ArrayList allTPList, EntityPlayer recieving){
         for(int r =0; r < allTPList.size(); r++){
             for(int c = 0; c < PlayerTPList.size(); c++){
-                if(PlayerTPList.indexOf(recieving.getDisplayName()) == 1) {
-                    AllTPList.remove(r);
-                }else if(PlayerTPList.indexOf(recieving.getDisplayName()) == 0){
-                    AllTPList.remove(r);
+                if(PlayerTPList.indexOf(recieving) == 1) {
+                	//PlayerTPList.remove(r);
                 }
             }
         }
