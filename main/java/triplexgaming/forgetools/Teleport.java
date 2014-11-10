@@ -54,7 +54,18 @@ public class Teleport {
 		
 	}
 	
-	
+	public EntityPlayer scanArray(ArrayList allTPList, EntityPlayer recieving){
+        for(int r =0; r < allTPList.size(); r++){
+            for(int c = 0; c < PlayerTPList.size(); c++){
+                if(PlayerTPList.indexOf(recieving.getDisplayName()) == 1) {
+                    return PlayerTPList.get(0);
+                }else if(PlayerTPList.indexOf(recieving.getDisplayName()) == 0){
+                    return PlayerTPList.get(1);
+                }
+            }
+        }
+        return null;
+    }
 	public void MsgReceivingPlayer(EntityPlayer player)
 	
 	{
@@ -63,4 +74,5 @@ public class Teleport {
     	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.RED + "         Type /Tpaccept to Accept the request."));
     	player.addChatMessage(new ChatComponentTranslation(" =============================================="));
 	}
+
 }
