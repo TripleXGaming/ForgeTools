@@ -16,8 +16,12 @@ import net.minecraft.util.ChatComponentTranslation;
 
 public class CommandTpa implements ICommand {
 	
-	Teleport Tpa = new Teleport();
+	Teleport Tpa;
 	
+	public CommandTpa(Teleport teleport) {
+		Tpa = teleport;
+	}
+
 	@Override
 	public int compareTo(Object arg0) {
 		// TODO Auto-generated method stub
@@ -55,7 +59,7 @@ public class CommandTpa implements ICommand {
 
 	    	EntityPlayer player = (EntityPlayer) icommandsender;
 	    	if(player.worldObj.isRemote == false){
-	    		Tpa.TeleportSession(player, astring, true, Minecraft.getMinecraft().theWorld.getTotalWorldTime());
+	    		Tpa.TeleportAddSession(player, astring, true, Minecraft.getMinecraft().theWorld.getTotalWorldTime());
 
 	    		}
 	    	}

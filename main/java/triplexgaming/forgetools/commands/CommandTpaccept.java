@@ -3,15 +3,18 @@ package triplexgaming.forgetools.commands;
 import java.util.List;
 
 import triplexgaming.forgetools.Teleport;
+import net.minecraft.client.Minecraft;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayer;
 
-public class CommandTpaHere implements ICommand {
-
-	public CommandTpaHere(Teleport teleport) {
-		
-	}
-
+public class CommandTpaccept implements ICommand {
+	
+	Teleport Tpa;
+	
+	public CommandTpaccept(Teleport teleport) {
+		Tpa = teleport;	
+		}
 
 	@Override
 	public int compareTo(Object arg0) {
@@ -22,7 +25,7 @@ public class CommandTpaHere implements ICommand {
 	@Override
 	public String getCommandName() {
 		// TODO Auto-generated method stub
-		return null;
+		return "Tpaccept";
 	}
 
 	@Override
@@ -38,15 +41,21 @@ public class CommandTpaHere implements ICommand {
 	}
 
 	@Override
-	public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_) {
-		// TODO Auto-generated method stub
+	  public void processCommand(ICommandSender icommandsender, String[] astring){
+	    if(icommandsender instanceof EntityPlayer){
 
+	    	EntityPlayer player = (EntityPlayer) icommandsender;
+	    	if(player.worldObj.isRemote == false){
+	    		Tpa.TeleportAcceptSession(player);
+
+	    		}
+	    }
 	}
 
 	@Override
 	public boolean canCommandSenderUseCommand(ICommandSender p_71519_1_) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

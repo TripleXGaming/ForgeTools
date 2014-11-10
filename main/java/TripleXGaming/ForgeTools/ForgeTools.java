@@ -10,6 +10,7 @@ import triplexgaming.forgetools.commands.CommandSetSpawn;
 import triplexgaming.forgetools.commands.CommandSpawn;
 import triplexgaming.forgetools.commands.CommandTpa;
 import triplexgaming.forgetools.commands.CommandTpaHere;
+import triplexgaming.forgetools.commands.CommandTpaccept;
 import triplexgaming.forgetools.config.ForgeToolsConfiguration;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
@@ -27,13 +28,13 @@ public class ForgeTools
     public static final String MODID = "Forge Tools";
     public static final String VERSION = "0.1";
 	public static  String configPath;
-
+	public Teleport teleport;
 
     @EventHandler
     public void preinit(FMLPreInitializationEvent event)
     {
         System.out.println(ChatFormatting.RED + MODID + " Version " + VERSION + " is Initializing.");
-        
+        teleport = new Teleport();
         configPath = event.getModConfigurationDirectory() + "/ForgeTools/";
         ForgeToolsConfiguration.init(configPath);
         
@@ -59,8 +60,9 @@ public class ForgeTools
 		event.registerServerCommand(new CommandSetSpawn());
 		event.registerServerCommand(new CommandHeal());
 		event.registerServerCommand(new CommandInfo());
-		event.registerServerCommand(new CommandTpa());
-		event.registerServerCommand(new CommandTpaHere());
+		event.registerServerCommand(new CommandTpa(teleport));
+		event.registerServerCommand(new CommandTpaHere(teleport));
+		event.registerServerCommand(new CommandTpaccept(teleport));
 		
 		
 	}
