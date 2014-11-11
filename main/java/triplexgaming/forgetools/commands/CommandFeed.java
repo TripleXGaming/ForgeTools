@@ -1,11 +1,6 @@
 package triplexgaming.forgetools.commands;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mojang.realmsclient.gui.ChatFormatting;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,13 +8,16 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentTranslation;
 
-public class CommandHeal implements ICommand {
+import java.util.ArrayList;
+import java.util.List;
+
+public class CommandFeed implements ICommand {
 
 	  private List aliases;
-	  public CommandHeal()
+	  public CommandFeed()
 	  {
 	    this.aliases = new ArrayList();
-	    this.aliases.add("heal");
+	    this.aliases.add("feed");
 	  }
 
 	@Override
@@ -30,7 +28,7 @@ public class CommandHeal implements ICommand {
 
 	@Override
 	public String getCommandName() {
-		return "heal";
+		return "feed";
 	}
 
 	@Override
@@ -56,9 +54,7 @@ public class CommandHeal implements ICommand {
 	    	EntityPlayer player = (EntityPlayer) icommandsender;
 	    	if(player.worldObj.isRemote == false){
 	    		
-		    	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + "You suddenly Feel a rush of life"));
-		    	player.setHealth(20f);
-		    //	player.setAbsorptionAmount(20f);
+		    	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + "You suddenly Feel full"));
 		    	player.getFoodStats().setFoodLevel(20);
 		    }
 	    }
@@ -73,10 +69,7 @@ public class CommandHeal implements ICommand {
         	    	System.out.println(player);
         	    	if(player.worldObj.isRemote == false){
         	    		
-        		    	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + "You suddenly Feel a rush of life"));
-        		    	player.setHealth(20f);
-        		    	player.setAbsorptionAmount(20f);
-        		    	
+        		    	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + "You suddenly Feel full"));
         		    	player.getFoodStats().setFoodLevel(50);
         		    }
                 }
@@ -85,7 +78,7 @@ public class CommandHeal implements ICommand {
                 	if(icommandsender instanceof EntityPlayer){
             	    	EntityPlayer player = (EntityPlayer) icommandsender;
             	    	if(player.worldObj.isRemote == false){
-            	    		player.addChatMessage(new ChatComponentTranslation(ChatFormatting.RED + "/heal <Player Name>"));
+            	    		player.addChatMessage(new ChatComponentTranslation(ChatFormatting.RED + "/feed <Player Name>"));
             		    }
             	    }
             	    	return;

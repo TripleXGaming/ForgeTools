@@ -2,15 +2,8 @@ package triplexgaming.forgetools;
 //coded by TripleXGaming and Spying247
 
 
-import triplexgaming.forgetools.commands.CommandHeal;
-import triplexgaming.forgetools.commands.CommandHome;
-import triplexgaming.forgetools.commands.CommandInfo;
-import triplexgaming.forgetools.commands.CommandSetHome;
-import triplexgaming.forgetools.commands.CommandSetSpawn;
-import triplexgaming.forgetools.commands.CommandSpawn;
-import triplexgaming.forgetools.commands.CommandTpa;
-import triplexgaming.forgetools.commands.CommandTpaHere;
-import triplexgaming.forgetools.commands.CommandTpaccept;
+import net.minecraftforge.common.MinecraftForge;
+import triplexgaming.forgetools.commands.*;
 import triplexgaming.forgetools.config.ForgeToolsConfiguration;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
@@ -37,7 +30,7 @@ public class ForgeTools
         teleport = new Teleport();
         configPath = event.getModConfigurationDirectory() + "/ForgeTools/";
         ForgeToolsConfiguration.init(configPath);
-        
+        MinecraftForge.EVENT_BUS.register(new SpawnEventHandler());
     }
     
     @EventHandler
@@ -63,7 +56,7 @@ public class ForgeTools
 		event.registerServerCommand(new CommandTpa(teleport));
 		event.registerServerCommand(new CommandTpaHere(teleport));
 		event.registerServerCommand(new CommandTpaccept(teleport));
-		
-		
+        event.registerServerCommand(new CommandSuperHeal());
+        event.registerServerCommand(new CommandFeed());
 	}
 }
