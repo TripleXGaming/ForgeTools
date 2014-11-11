@@ -1,5 +1,6 @@
 package triplexgaming.forgetools.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import triplexgaming.forgetools.Teleport;
@@ -11,9 +12,12 @@ import net.minecraft.entity.player.EntityPlayer;
 public class CommandTpaccept implements ICommand {
 	
 	Teleport Tpa;
-	
+	private List aliases;
+
 	public CommandTpaccept(Teleport teleport) {
 		Tpa = teleport;	
+	    this.aliases = new ArrayList();
+	    this.aliases.add("tpaccept");
 		}
 
 	@Override
@@ -25,13 +29,13 @@ public class CommandTpaccept implements ICommand {
 	@Override
 	public String getCommandName() {
 		// TODO Auto-generated method stub
-		return "Tpaccept";
+		return "tpaccept";
 	}
 
 	@Override
 	public String getCommandUsage(ICommandSender p_71518_1_) {
 		// TODO Auto-generated method stub
-		return null;
+		return "Tpaccept";
 	}
 
 	@Override
@@ -68,7 +72,7 @@ public class CommandTpaccept implements ICommand {
 	@Override
 	public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }

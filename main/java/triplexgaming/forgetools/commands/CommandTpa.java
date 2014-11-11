@@ -1,5 +1,6 @@
 package triplexgaming.forgetools.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import triplexgaming.forgetools.Teleport;
@@ -17,9 +18,11 @@ import net.minecraft.util.ChatComponentTranslation;
 public class CommandTpa implements ICommand {
 	
 	Teleport Tpa;
-	
+	private List aliases;
 	public CommandTpa(Teleport teleport) {
 		Tpa = teleport;
+	    this.aliases = new ArrayList();
+	    this.aliases.add("tpa");
 	}
 
 	@Override
@@ -31,7 +34,7 @@ public class CommandTpa implements ICommand {
 	@Override
 	public String getCommandName() {
 		// TODO Auto-generated method stub
-		return "Tpa";
+		return "tpa";
 	}
 
 	@Override
@@ -59,7 +62,7 @@ public class CommandTpa implements ICommand {
 
 	    	EntityPlayer player = (EntityPlayer) icommandsender;
 	    	if(player.worldObj.isRemote == false){
-	    		Tpa.TeleportAddSession(player, astring, true, Minecraft.getMinecraft().theWorld.getTotalWorldTime());
+	    		Tpa.TeleportAddSession(player, astring, Minecraft.getMinecraft().theWorld.getTotalWorldTime(), true);
 
 	    		}
 	    	}
@@ -80,7 +83,7 @@ public class CommandTpa implements ICommand {
 	@Override
 	public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }

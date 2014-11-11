@@ -1,7 +1,10 @@
 package triplexgaming.forgetools;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 
@@ -14,53 +17,65 @@ import net.minecraft.util.Vec3;
 
 public class Teleport {
 
-	public ArrayList<ArrayList<EntityPlayer>> AllTPList = new ArrayList<ArrayList<EntityPlayer>>();
-	public ArrayList<EntityPlayer> PlayerTPList = new ArrayList<EntityPlayer>();
-	
-	
-	private boolean isWaitingForTeleport = false;
-	private long SendTime = 0;
-	
-	public void TeleportAddSession(EntityPlayer playerSender, String[] PlayerReceiver, boolean TpaType, long WorldTime)
+	private Map<EntityPlayer,EntityPlayer> TeleportQue = new HashMap<EntityPlayer, EntityPlayer>();
+
+	public void TeleportAddSession(EntityPlayer playerSender, String[] PlayerReceiver, long WorldTime, boolean Type)
 	{
-	    List<EntityPlayerMP> PlayerList = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+		List<EntityPlayerMP> PlayerList = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+
 		  if (PlayerReceiver.length != 0)
 		    {
-	            for(int i = 0; i < PlayerList.size(); i++) {
-	                if(PlayerList.get(i).getDisplayName().equals(PlayerReceiver[0])){
-	                    EntityPlayer ReceivingPlayer = PlayerList.get(i);
-	                    
-	            			//TPA
-	            			PlayerTPList.add(playerSender);
-	            			PlayerTPList.add(ReceivingPlayer);
-	            			AllTPList.add(PlayerTPList);
-	            		
-	        	    	MsgReceivingPlayer(ReceivingPlayer);
+	            for(int i = 0; i < PlayerList.size(); i++)
+	            {
+	                if(PlayerList.get(i).getDisplayName().equals(PlayerReceiver[0]))
+	                {
+	                  	 EntityPlayer ReceivingPlayer = PlayerList.get(i);
+	                	if(TeleportQue.containsKey(ReceivingPlayer))
+	                	{
+	                		TeleportQue.remove(ReceivingPlayer);
+
+	                	}
+	                	if(TeleportQue.containsValue(playerSender))
+	                	{
+	                        for (Entry<EntityPlayer, EntityPlayer> entry : TeleportQue.entrySet()) {
+	                            if (entry.getValue().equals(playerSender)) {
+	                            	TeleportQue.remove(entry.getKey());
+	                            }
+	                        }
+	                		TeleportQue.remove(playerSender);
+
+	                	}
+	                 	if(Type)
+	                 	{
+	                 			//TPA
+	                     	TeleportQue.put(ReceivingPlayer, playerSender);
+		         			MsgReceivingPlayer(ReceivingPlayer, true);
+	                 	}
+	                 	else
+	                 	{
+	             			//TPAHere
+	                     	TeleportQue.put(playerSender, ReceivingPlayer);
+		         			MsgReceivingPlayer(ReceivingPlayer, false);
+	                 	}
 	                }
+	                playerSender.addChatMessage(new ChatComponentTranslation(ChatFormatting.RED + " Player not Available!"));
 	            }
 		    }
 	}
 	
-
-	
-	public void TeleportAcceptSession(EntityPlayer recieving){
-        for(int r = 0; r <= AllTPList.size(); r++){
-            for(int c = 0; c <= PlayerTPList.size(); c++){
-                if(AllTPList.get(r).get(c).equals(recieving)) {
-                	EntityPlayer PlayerToTeleportTo = AllTPList.get(r).get(0);
-                	
-                	if(AllTPList.get(r).get(c) != PlayerToTeleportTo)
-                	{
-            			System.out.println(AllTPList);            	
-            			System.out.println(AllTPList.get(r).get(0));
-            			System.out.println(AllTPList.get(r).get(1));
-            			System.out.println(PlayerToTeleportTo);
-                    	TeleportPlayer(PlayerToTeleportTo, recieving);
-                		AllTPList.remove(r);
-                		PlayerTPList.clear();
-                		//DeleteArray(AllTPList, recieving);
-                		
-                	}
+	public void TeleportAcceptSession(EntityPlayer recieving)
+	{
+        if(TeleportQue.containsKey(recieving))
+        {
+        	TeleportPlayer(TeleportQue.get(recieving), recieving);
+        	TeleportQue.remove(recieving);
+        }
+        if(TeleportQue.containsValue(recieving))
+        {
+            for (Entry<EntityPlayer, EntityPlayer> entry : TeleportQue.entrySet()) {
+                if (entry.getValue().equals(recieving)) {
+                	TeleportPlayer(recieving, entry.getKey());
+                	TeleportQue.remove(entry.getKey());
                 }
             }
         }
@@ -76,23 +91,24 @@ public class Teleport {
 	}
 	
 	
-	public void DeleteArray(ArrayList allTPList, EntityPlayer recieving){
-        for(int r =0; r < allTPList.size(); r++){
-            for(int c = 0; c < PlayerTPList.size(); c++){
-                if(PlayerTPList.indexOf(recieving) == 1) {
-                	//PlayerTPList.remove(r);
-                }
-            }
-        }
-    }
-	
-	public void MsgReceivingPlayer(EntityPlayer player)
-	
+	public void MsgReceivingPlayer(EntityPlayer player, boolean Type)
 	{
-		player.addChatMessage(new ChatComponentTranslation(" =============================================="));
-		player.addChatMessage(new ChatComponentTranslation(ChatFormatting.RED + "         " + player.getDisplayName() + " Wants to teleport to you"));
-    	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.RED + "         Type /Tpaccept to Accept the request."));
-    	player.addChatMessage(new ChatComponentTranslation(" =============================================="));
+		if(Type)
+		{
+			player.addChatMessage(new ChatComponentTranslation(" =============================================="));
+			player.addChatMessage(new ChatComponentTranslation(ChatFormatting.RED + "         " + player.getDisplayName() + " Wants to teleport to you"));
+	    	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.RED + "         Type /Tpaccept to Accept the request."));
+	    	player.addChatMessage(new ChatComponentTranslation(" =============================================="));	
+		}
+		else
+		{
+			player.addChatMessage(new ChatComponentTranslation(" =============================================="));
+			player.addChatMessage(new ChatComponentTranslation(ChatFormatting.RED + "      " + player.getDisplayName() + " Wants you to teleport to them"));
+	    	player.addChatMessage(new ChatComponentTranslation(ChatFormatting.RED + "         Type /Tpaccept to Accept the request."));
+	    	player.addChatMessage(new ChatComponentTranslation(" =============================================="));	
+			
+		}
+
 	}
 
 }
