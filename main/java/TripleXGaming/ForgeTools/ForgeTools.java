@@ -2,15 +2,18 @@ package triplexgaming.forgetools;
 //coded by TripleXGaming and Spying247
 
 
+import net.minecraft.server.MinecraftServer;
 import triplexgaming.forgetools.commands.CommandHeal;
 import triplexgaming.forgetools.commands.CommandHome;
 import triplexgaming.forgetools.commands.CommandInfo;
+import triplexgaming.forgetools.commands.CommandKillAll;
 import triplexgaming.forgetools.commands.CommandSetHome;
 import triplexgaming.forgetools.commands.CommandSetSpawn;
 import triplexgaming.forgetools.commands.CommandSpawn;
 import triplexgaming.forgetools.commands.CommandTpa;
 import triplexgaming.forgetools.commands.CommandTpaHere;
 import triplexgaming.forgetools.commands.CommandTpaccept;
+import triplexgaming.forgetools.commands.CommandkillItems;
 import triplexgaming.forgetools.config.ForgeToolsConfiguration;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
@@ -43,7 +46,7 @@ public class ForgeTools
     @EventHandler
     public void load(FMLInitializationEvent event)
     {
-    	
+		
     }
     
     @EventHandler
@@ -63,7 +66,8 @@ public class ForgeTools
 		event.registerServerCommand(new CommandTpa(teleport));
 		event.registerServerCommand(new CommandTpaHere(teleport));
 		event.registerServerCommand(new CommandTpaccept(teleport));
-		
+		event.registerServerCommand(new CommandKillAll());
+		event.registerServerCommand(new CommandkillItems());
 		
 	}
 }
