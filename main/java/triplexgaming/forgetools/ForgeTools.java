@@ -26,6 +26,7 @@ public class ForgeTools
 	public static  String configPath;
 	public Teleport teleport;
 	
+	//Static Variables for Configs and other things!
 	public static double StartingMoney;
 	public static double PlayReward;
 	public static int TickAmount;
