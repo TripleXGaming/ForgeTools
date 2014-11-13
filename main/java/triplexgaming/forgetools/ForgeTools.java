@@ -4,11 +4,13 @@ package triplexgaming.forgetools;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
+import triplexgaming.forgetools.Handlers.ForgeToolsEventHandler;
 import triplexgaming.forgetools.commands.*;
-import triplexgaming.forgetools.config.ForgeToolsConfiguration;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 
+import triplexgaming.forgetools.config.ForgeToolsConfiguration;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -20,13 +22,19 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 public class ForgeTools
 {
     public static final String MODID = "Forge Tools";
-    public static final String VERSION = "0.1";
+    public static final String VERSION = "0.2";
 	public static  String configPath;
 	public Teleport teleport;
-
+	
+	public static double StartingMoney;
+	public static double PlayReward;
+	public static int TickAmount;
+	
+	
     @EventHandler
     public void preinit(FMLPreInitializationEvent event)
     {
+    	FMLCommonHandler.instance().bus().register(new ForgeToolsEventHandler());
         System.out.println(ChatFormatting.RED + MODID + " Version " + VERSION + " is Initializing.");
         teleport = new Teleport();
         configPath = event.getModConfigurationDirectory() + "/ForgeTools/";
@@ -42,7 +50,7 @@ public class ForgeTools
     @EventHandler
     public void postinit(FMLPostInitializationEvent event)
     {
-    	
+
     }
     
 	@EventHandler
@@ -60,5 +68,6 @@ public class ForgeTools
 		event.registerServerCommand(new CommandkillItems());
         event.registerServerCommand(new CommandSuperHeal());
         event.registerServerCommand(new CommandFeed());
+        event.registerServerCommand(new CommandMoney());
 	}
 }
