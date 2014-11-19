@@ -1,28 +1,17 @@
 package triplexgaming.forgetools.commands;
 
-import java.util.ArrayList;
+import java.nio.ByteBuffer;
 import java.util.List;
 
-import triplexgaming.forgetools.Teleport;
+import com.mojang.realmsclient.gui.ChatFormatting;
+
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentTranslation;
 
-public class CommandkillItems implements ICommand {
-
-	//List<Entity> EntityList = MinecraftServer.getServer().getEntityWorld().getLoadedEntityList();
-	
-	  private List aliases;
-	  public CommandkillItems()
-	  {
-	    this.aliases = new ArrayList();
-	    this.aliases.add("killitems");
-	  }
+public class CommandMoney implements ICommand {
 
 	@Override
 	public int compareTo(Object arg0) {
@@ -33,7 +22,7 @@ public class CommandkillItems implements ICommand {
 	@Override
 	public String getCommandName() {
 		// TODO Auto-generated method stub
-		return "killitems";
+		return "money";
 	}
 
 	@Override
@@ -49,15 +38,21 @@ public class CommandkillItems implements ICommand {
 	}
 
 	@Override
-	public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_) {
-
-		//for (int i = 0; i < EntityList.size(); i++) {
-		//	if(EntityList.get(i)  instanceof EntityItem)
-		//	{
-		//		EntityList.get(i).setDead();
-		//	}
-			
-	//	}
+	public void processCommand(ICommandSender icommandsender, String[] astring) {
+		EntityPlayer player = (EntityPlayer) icommandsender;
+    	if(player.worldObj.isRemote == false){
+    		
+    		if(player.getEntityData().hasKey("Money"))
+	    	{
+    			double Money = player.getEntityData().getDouble("Money");
+    			player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + "You Have $"+ Money));
+	    	}
+    		else
+    		{
+    			//player.getEntityData().setDouble("Money", 0.0);
+    		}
+    		
+    	}
 	}
 
 	@Override

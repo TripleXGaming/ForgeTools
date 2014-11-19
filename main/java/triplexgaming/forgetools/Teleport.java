@@ -21,7 +21,8 @@ public class Teleport {
 
 	public void TeleportAddSession(EntityPlayer playerSender, String[] PlayerReceiver, long WorldTime, boolean Type)
 	{
-		List<EntityPlayerMP> PlayerList = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+		List<EntityPlayer> PlayerList = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+		System.out.println(PlayerList);
 
 		  if (PlayerReceiver.length != 0)
 		    {

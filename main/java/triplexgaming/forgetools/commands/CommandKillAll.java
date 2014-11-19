@@ -14,7 +14,7 @@ import net.minecraft.server.MinecraftServer;
 
 public class CommandKillAll implements ICommand {
 
-	List<Entity> EntityList = MinecraftServer.getServer().getEntityWorld().getLoadedEntityList();
+	//List<Entity> EntityList = MinecraftServer.getServer().getEntityWorld().getLoadedEntityList();
 	
 	  private List aliases;
 	  public CommandKillAll()
@@ -49,13 +49,13 @@ public class CommandKillAll implements ICommand {
 
 	@Override
 	public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_) {
-		for (int i = 0; i < EntityList.size(); i++) {
-			if(EntityList.get(i)  instanceof EntityMob)
-			{
-				EntityList.get(i).setDead();
-			}
+		//for (int i = 0; i < EntityList.size(); i++) {
+			//if(EntityList.get(i)  instanceof EntityMob)
+			//{
+			//	EntityList.get(i).setDead();
+			//}
 			
-		}
+		//}
 	}
 
 	@Override

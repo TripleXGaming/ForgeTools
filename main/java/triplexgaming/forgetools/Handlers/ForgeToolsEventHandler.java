@@ -20,6 +20,11 @@ public class ForgeToolsEventHandler {
 	        {
 	        	event.player.getEntityData().setDouble("Money", ForgeTools.StartingMoney);
 	        	System.out.println("Testing");
+	        }
+	        
+	        if(!(event.player.getEntityData().hasKey("Rank")))
+	        {
+	        	event.player.getEntityData().setString("Rank", "Member");
 	        }	
 	    	
 	    }

@@ -56,14 +56,15 @@ public class CommandHome implements ICommand
     		
     		if(player.getEntityData().hasKey("Home"))
 	    	{
-	    		byte[] PlayerCoords = new byte[24];
+	    		byte[] PlayerCoords = new byte[40];
 	    		PlayerCoords = player.getEntityData().getByteArray("Home"); 
 	    		
 	    		byte[] PlayerX = new byte[8];
 	    		byte[] PlayerY = new byte[8];
 	    		byte[] PlayerZ = new byte[8];
+	    		byte[] PlayerYaw = new byte[4];
 	    		
-	    		for(int i = 0; i < 23; i++)
+	    		for(int i = 0; i < 28; i++)
 	    		{
 	    			//Position
 	    			if(i < 8)
@@ -78,14 +79,24 @@ public class CommandHome implements ICommand
 	    			{
 	    				PlayerZ[i - 16] = PlayerCoords[i];
 	    			}
-	    				
+	    			if(i < 28 && i > 23)
+	    			{
+	    				PlayerYaw[i - 24] = PlayerCoords[i];
+	    			}
 	    			//TODO Rotation
 	    		}
 	    		
 	    		double PosX = ByteBuffer.wrap(PlayerX).getDouble();
 	    		double PosY = ByteBuffer.wrap(PlayerY).getDouble();
 	    		double PosZ = ByteBuffer.wrap(PlayerZ).getDouble();
-	    		player.setPositionAndUpdate(PosX,PosY, PosZ);
+	    		float playeryaws = ByteBuffer.wrap(PlayerYaw).getFloat();  
+	    		
+	    		//player.setPositionAndUpdate(PosX,PosY, PosZ);
+	    		//player.setLocationAndAngles(PosX, PosY, PosZ, playeryaws, 0);
+	    		//player.setLocationAndAngles(PosX, PosY, PosZ, playeryaws, player.rotationPitch);
+	    		((EntityPlayerMP) player).playerNetServerHandler.setPlayerLocation(PosX, PosY, PosZ, playeryaws, player.rotationPitch);
+	    		//player.setRotationYawHead(playeryaws);
+	    		System.out.println("test: " + playeryaws);
 	    	}
 	    	else
 	    	{

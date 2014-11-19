@@ -1,29 +1,16 @@
 package triplexgaming.forgetools.commands;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.net.Socket;
 import java.util.List;
 
-import triplexgaming.forgetools.Teleport;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
 
-public class CommandkillItems implements ICommand {
+public class CommandDevTest implements ICommand {
 
-	//List<Entity> EntityList = MinecraftServer.getServer().getEntityWorld().getLoadedEntityList();
+	public String IpToPing = "64.15.120.59";
 	
-	  private List aliases;
-	  public CommandkillItems()
-	  {
-	    this.aliases = new ArrayList();
-	    this.aliases.add("killitems");
-	  }
-
 	@Override
 	public int compareTo(Object arg0) {
 		// TODO Auto-generated method stub
@@ -33,13 +20,13 @@ public class CommandkillItems implements ICommand {
 	@Override
 	public String getCommandName() {
 		// TODO Auto-generated method stub
-		return "killitems";
+		return "devtest";
 	}
 
 	@Override
 	public String getCommandUsage(ICommandSender p_71518_1_) {
 		// TODO Auto-generated method stub
-		return null;
+		return "devtest";
 	}
 
 	@Override
@@ -50,14 +37,24 @@ public class CommandkillItems implements ICommand {
 
 	@Override
 	public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_) {
-
-		//for (int i = 0; i < EntityList.size(); i++) {
-		//	if(EntityList.get(i)  instanceof EntityItem)
-		//	{
-		//		EntityList.get(i).setDead();
-		//	}
-			
-	//	}
+		Socket socket = null;
+		boolean reachable = false;
+		try {
+		    socket = new Socket(IpToPing, 80);
+		    reachable = true;
+			System.out.println(reachable);
+		} 
+		catch (IOException exception) {
+			System.out.println(exception);
+	    }
+		finally {            
+		    if (socket != null) try { 
+		    	socket.close();
+			    reachable = false;
+		    	} 
+		    catch(IOException e) {}
+			System.out.println(reachable);
+		}
 	}
 
 	@Override

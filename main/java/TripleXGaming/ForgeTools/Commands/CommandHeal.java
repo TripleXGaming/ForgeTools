@@ -48,7 +48,7 @@ public class CommandHeal implements ICommand {
 	  @Override
 	  public void processCommand(ICommandSender icommandsender, String[] astring){
 		    List<EntityPlayerMP> PlayerList = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
-
+		   
 		  
 	    if(astring.length == 0){
 	    //  icommandsender.addChatMessage(new ChatComponentTranslation(ChatFormatting.RED + "/heal <Player Name>"));

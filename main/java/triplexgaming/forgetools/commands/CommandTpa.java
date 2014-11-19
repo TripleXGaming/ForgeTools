@@ -62,7 +62,7 @@ public class CommandTpa implements ICommand {
 
 	    	EntityPlayer player = (EntityPlayer) icommandsender;
 	    	if(player.worldObj.isRemote == false){
-	    		Tpa.TeleportAddSession(player, astring, Minecraft.getMinecraft().theWorld.getTotalWorldTime(), true);
+	    		Tpa.TeleportAddSession(player, astring, MinecraftServer.getServer().getTickCounter(), true);
 
 	    		}
 	    	}

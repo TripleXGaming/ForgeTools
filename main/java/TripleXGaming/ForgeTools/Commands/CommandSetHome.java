@@ -55,17 +55,21 @@ public class CommandSetHome implements ICommand {
 		    	if(player.getEntityData().hasKey("Home"))
 		    	{
 		    		
-		    		byte[] PlayerHome = new byte[24];
+		    		byte[] PlayerHome = new byte[28];
 		    				
 		    		byte[] PlayerHomeX = new byte[8];
 		    		byte[] PlayerHomeY = new byte[8];
 		    		byte[] PlayerHomeZ = new byte[8];
-		 
-		    		PlayerHomeX = toByteArray(player.posX);
-		    		PlayerHomeY = toByteArray(player.posY);
-		    		PlayerHomeZ = toByteArray(player.posZ);
-		  
-		    		for(int i = 0; i < 23; i++)
+		    		byte[] PlayerPitch = new byte[8];
+		    		byte[] PlayerYaw = new byte[4];
+		    		
+		    		
+		    		PlayerHomeX = doubletoByteArray(player.posX);
+		    		PlayerHomeY = doubletoByteArray(player.posY);
+		    		PlayerHomeZ = doubletoByteArray(player.posZ);
+		    		PlayerYaw = floattoByteArray(player.getRotationYawHead()); 
+		    		
+		    		for(int i = 0; i < 28; i++)
 		    		{
 		    			//Positon
 		    			if(i < 8)
@@ -80,23 +84,57 @@ public class CommandSetHome implements ICommand {
 		    			{
 		    				PlayerHome[i] = PlayerHomeZ[i - 16];
 		    			}
-		    				
+		    			if(i < 31 && i > 23)
+		    			{
+		    				PlayerHome[i] = PlayerYaw[i - 24];
+		    			}
+
 		    			//TODO Rotation
 		    		}
+		    		System.out.println(player.getRotationYawHead());
 		    		player.getEntityData().setByteArray("Home", PlayerHome);
 		    		
 		    	}
 		    	else
 		    	{
-	    			player.addChatMessage(new ChatComponentTranslation("Home Set"));
-		    		ChunkCoordinates Vector = player.getPlayerCoordinates();
-		    		int[] PlayerCoords = new int[4];
-		    		PlayerCoords[1] = Vector.posX;
-		    		PlayerCoords[2] = Vector.posY;
-		    		PlayerCoords[3] = Vector.posZ;
-		    		//PlayerCoords[4] = player.getd;
-		    		player.getEntityData().setIntArray("Home", PlayerCoords);
-
+		    		
+		    		byte[] PlayerHome = new byte[28];
+    				
+		    		byte[] PlayerHomeX = new byte[8];
+		    		byte[] PlayerHomeY = new byte[8];
+		    		byte[] PlayerHomeZ = new byte[8];
+		    		byte[] PlayerYaw = new byte[4];
+		 
+		    		
+		    		PlayerHomeX = doubletoByteArray(player.posX);
+		    		PlayerHomeY = doubletoByteArray(player.posY);
+		    		PlayerHomeZ = doubletoByteArray(player.posZ);
+		    		PlayerYaw = floattoByteArray(player.getRotationYawHead()); 
+		    		//PlayerPitch = toByteArray(player.get); 
+		    		
+		    		for(int i = 0; i < 28; i++)
+		    		{
+		    			//Positon
+		    			if(i < 8)
+		    			{
+			    			PlayerHome[i] = PlayerHomeX[i];
+		    			}
+		    			if(i < 16 && i > 7)
+		    			{
+		    				PlayerHome[i] = PlayerHomeY[i - 8];
+		    			}
+		    			if(i < 24 && i > 15)
+		    			{
+		    				PlayerHome[i] = PlayerHomeZ[i - 16];
+		    			}
+		    			if(i < 31 && i > 23)
+		    			{
+		    				PlayerHome[i] = PlayerYaw[i - 24];
+		    			}
+			    		System.out.println(player.getRotationYawHead());
+		    			//TODO Rotation
+		    		}
+		    		player.getEntityData().setByteArray("Home", PlayerHome);
 		    	}
 		    	EntityPlayerMP thePlayer = (EntityPlayerMP) player;    	
 		    	//List<EntityPlayerMP> thePlayer = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
@@ -105,12 +143,16 @@ public class CommandSetHome implements ICommand {
 	}
 
 	
-	public byte[] toByteArray(double value) {
+	public byte[] doubletoByteArray(double value) {
 	    byte[] bytes = new byte[8];
 	    ByteBuffer.wrap(bytes).putDouble(value);
 	    return bytes;
 	}
-
+	public byte[] floattoByteArray(float value) {
+	    byte[] bytes = new byte[4];
+	    ByteBuffer.wrap(bytes).putFloat(value);
+	    return bytes;
+	}
 	
 	@Override
 	public boolean canCommandSenderUseCommand(ICommandSender p_71519_1_) {

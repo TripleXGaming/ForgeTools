@@ -1,17 +1,16 @@
-package triplexgaming.forgetools;
+package triplexgaming.forgetools.commands;
 
-import java.nio.ByteBuffer;
 import java.util.List;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
-
+import triplexgaming.forgetools.Teleport;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChatComponentTranslation;
 
-public class CommandMoney implements ICommand {
+public class CommandTpall implements ICommand {
+
+	public CommandTpall(Teleport teleport) {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public int compareTo(Object arg0) {
@@ -22,7 +21,7 @@ public class CommandMoney implements ICommand {
 	@Override
 	public String getCommandName() {
 		// TODO Auto-generated method stub
-		return "money";
+		return null;
 	}
 
 	@Override
@@ -38,21 +37,9 @@ public class CommandMoney implements ICommand {
 	}
 
 	@Override
-	public void processCommand(ICommandSender icommandsender, String[] astring) {
-		EntityPlayer player = (EntityPlayer) icommandsender;
-    	if(player.worldObj.isRemote == false){
-    		
-    		if(player.getEntityData().hasKey("Money"))
-	    	{
-    			double Money = player.getEntityData().getDouble("Money");
-    			player.addChatMessage(new ChatComponentTranslation(ChatFormatting.GREEN + "You Have $"+ Money));
-	    	}
-    		else
-    		{
-    			//player.getEntityData().setDouble("Money", 0.0);
-    		}
-    		
-    	}
+	public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
